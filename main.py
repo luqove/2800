@@ -2,6 +2,7 @@
 #############################
 import time
 from sys_lib import *
+from PyQt5.QtCore import pyqtSignal,QThread,QMutex
 
 class MainSystem(object):
     """the main logic for the system"""
