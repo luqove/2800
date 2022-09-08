@@ -63,5 +63,8 @@ class System(object):
     
     def ir_sensor_distance(self):
         pass
+
+    def switch_closed(self):
+        pass
     
   
