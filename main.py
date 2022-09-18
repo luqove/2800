@@ -16,7 +16,7 @@ class MainSystem(object):
             
             if self.system.tof_sensor_distance < 30:
                 self.system.close_arm()
-            else:
+            else:git@github.com:luqove/2800.git
                 time.sleep(1)
             
             if self.system.limit_switch_closed:
