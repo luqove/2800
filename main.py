@@ -1,5 +1,4 @@
-#import RPi.GPIO as GPIO
-#############################
+import RPi.GPIO as GPIO
 import time
 from sys_lib import *
 from PyQt5.QtCore import pyqtSignal,QThread,QMutex
