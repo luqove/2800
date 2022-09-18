@@ -10,7 +10,7 @@
 #
 #######################################
 #
-GPIO.setmode(GPIO.BOARD)
+
 import RPi.GPIO as GPIO
 from RpiMotorLib import RpiMotorLib
 import time
@@ -20,7 +20,7 @@ import time
 ################################
 #
 #define GPIO pins
-
+GPIO.setmode(GPIO.BOARD)
 direction= 16 # Direction (DIR) GPIO Pin (GPIO)
 step = 12 # Step GPIO Pin (pwm)
 EN_pin = 18 # enable pin (LOW to enable) (GPIO)
