@@ -41,6 +41,9 @@ class MainSystem(object):
                 self.system.extend_arm()
                 self.system.release_arm()
                 
+            if self.system.distance_correct_height:
+                pass
+                
             if self.system.limit_switch_closed:
                 self.system.retract_arm()
 
