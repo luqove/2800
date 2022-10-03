@@ -5,7 +5,7 @@ from PyQt5.QtCore import pyqtSignal,QThread,QMutex
 from Lib.IRSensor import IRsensor
 from Lib.servo_motor import ServoMotor
 from Lib.stepper_motor import StepperMotor
-from Lib.TofSensor import TofSensor
+from Lib.TofSensor import Tofsensor
 from Lib.limit_switch import LimitSwitch
 from Lib.DcMotor import DcMotor
 from Lib.DCEncoder import DCEncoder
