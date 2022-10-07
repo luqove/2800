@@ -8,7 +8,7 @@ class StepperMotor(object):
 
     def __init__(self, driver_pins):
         # One motor corresponds to four pins,
-        # and the following are the corresponding pins of two motors. need to be entered when creating。
+        # and the following are the corresponding pins of two motors. need to be entered when creating
         # [3, 5, 7, 11], [16, 18, 22, 24]
         self.driver_pins = driver_pins
 

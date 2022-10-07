@@ -1,4 +1,3 @@
-from ast import Pass
 import RPi.GPIO as GPIO
 import time
 
