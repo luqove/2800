@@ -1,14 +1,13 @@
+from ast import Pass
 import RPi.GPIO as GPIO
+import time
 
 
-class IRsensor(object):
-    """
-    IR sensor method
-    """
+class LimitSwitch(object):
 
     def __init__(self, pin):
         self.pin = pin
         GPIO.setup(self.pin, GPIO.IN)
 
-    def read_data(self):
+    def get_read(self):
         return GPIO.Input(self.pin)
