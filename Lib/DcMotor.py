@@ -6,7 +6,7 @@ import time
 # Dc_rotate = DcMotorDriver(1,2,3, Dcencoder_rotate)
 from PyQt5.QtCore import QThread, pyqtSignal
 
-
+GPIO.setmode(GPIO.BCM)
 class DcMotor(QThread):
     # 用于向父线程反馈Encoder的数值。
     encode_value = pyqtSignal(int)
