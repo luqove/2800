@@ -9,7 +9,7 @@ from Lib.TofSensor import TofSensor
 from Lib.LimitSwitch import LimitSwitch
 from Lib.DcMotor import DcMotor
 from Lib.DCEncoder import DCEncoder
-from Lib.Timer import TimerCount
+from Lib.timer import TimerCount
 
 
 class System(QThread):
@@ -23,7 +23,7 @@ class System(QThread):
     def __init__(self):
         # TODO 需要填入pin 的 number
         super().__init__(self)
-        self.clock = TofSensor(120)
+        self.clock = TimerCount(120)
         self.servo_G = ServoMotor()
         self.servo_H = ServoMotor()
         self.limit_switch = LimitSwitch()
@@ -109,8 +109,9 @@ class System(QThread):
         return self.ir_sensor.read_data()
 
     def release_package(self):
+        #ir 读数<10cm
         self.ir_sensor.read_data() < 10
-        # ? 转多少可以不清楚
+        # ? 转多少不清楚
         self.servo_G.act(180)
 
 
