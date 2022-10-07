@@ -3,7 +3,8 @@ import sys
 import threading
 from PyQt5.QtCore import pyqtSignal,QThread,QMutex
 from Lib.IRSensor import IRsensor
-from Lib.servo_motor import ServoMotor
+from Lib.servo_motor import ServoMotor_gripper
+from Lib.servo_motor_continous import ServoMotor_continous
 from Lib.stepper_motor import StepperMotor
 from Lib.TofSensor import Tofsensor
 from Lib.limit_switch import LimitSwitch
@@ -117,8 +118,16 @@ class Clock(threading):
     """
     根据输入的时间计时
     """
+    time_signal = pyqtSignal(int)
     def __init__(self, time_count):
         super(Clock, self).__init__()
+        self.time_count = time_count
+    
+    def run(self):
+        while not(self.isInterrupted()):
+            time.sleep(self.time_count)
+            self.time_signal.emit()
+            
 
 
 

@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
 import time
 
-class Tofsensor(object):
+class TofSensor(object):
     """_summary_
     method for time of flight sensor
     """

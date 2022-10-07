@@ -1,4 +1,4 @@
-import sys
+iiimport sys
 
 import time
 from PyQt5.QtCore import Qt, pyqtSignal, QThread, QMutex
@@ -9,5 +9,5 @@ mutex = QMutex()
 class MainWindow(QMainWindow):
    
     def __init__(self, parent=None):
-        super(MainWindow, self).__init__(parent)
+        super(MainWin:dow, self).__init__(parent)
         self.setupUi(self)

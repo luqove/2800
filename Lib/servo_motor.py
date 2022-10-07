@@ -1,8 +1,12 @@
 import RPi.GPIO as GPIO
 import time
+import pigpio
+
+GPIO.setmode(GPIO.BCM)
 
 class ServoMotor(object):
-    """This is the servo motor method"""
+    """This is the servo motor for both 
+        gripping and horizontal """
     
     def __init__(self,servo_pin):
         self.servo_pin = servo_pin
@@ -27,3 +31,14 @@ class ServoMotor(object):
         
         #turn off PWM 
         self.pwm.set_servo_pulsewidth(self.servo_pin,0)
+        
+if __name__ == "__main__":
+    GPIO.setmode(GPIO.BCM)
+    GPIO.setup(11, GPIO.OUT)
+    servomotor = ServoMotor(11)
+    servomotor.ChangeDutyCycle(5) # left -90 deg position
+    time.sleep(1)
+    servomotor.ChangeDutyCycle(7.5) # neutral position
+    time.sleep(1)
+    servomotor.ChangeDutyCycle(10) # right +90 deg position
+    time.sleep(1)

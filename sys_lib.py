@@ -3,7 +3,7 @@ import sys
 import threading
 from PyQt5.QtCore import pyqtSignal,QThread,QMutex
 from Lib.IRSensor import IRsensor
-from Lib.servo_motor import ServoMotor
+from Lib.servo_motor_test import ServoMotor
 from Lib.stepper_motor import StepperMotor
 from Lib.TofSensor import TofSensor
 from Lib.limit_switch import LimitSwitch
@@ -22,6 +22,7 @@ class System(QThread):
 
     def __init__(self):
         # TODO 需要填入pin 的number
+        super().__init__(self)
         self.clock = Clock()
         self.servo_G = ServoMotor()
         self.servo_H = ServoMotor()
@@ -31,7 +32,7 @@ class System(QThread):
         self.DC_rotate = DcMotor()
         self.ir_sensor = IRsensor()
         self.DC_encoder = DCEncoder()
-        self.Tof_sensor = Tofsensor()
+        self.Tof_sensor = TofSensor()
 
         
         
@@ -48,6 +49,11 @@ class System(QThread):
     def secure_package(self):
         self.ir_sensor.read_data()<10
         self.start_gripper()
+        
+    def release_package(self):
+        self.ir_sensor.read_data()<10
+        #? 转多少可以不清楚
+        self.servo_G.act(180)
 
     # 伸出机械臂
     def extend_arm(self):

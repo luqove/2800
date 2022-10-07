@@ -5,20 +5,20 @@ from PyQt5.QtCore import pyqtSignal,QThread,QMutex
 from Lib.servo_motor import servo_motor
 
 
-class state:
-    def LimitSwitch_closed(self):
-        pass
+
+class LimitSwitch_closed(QThread):
+    Pass
     
-    def Rotate_arm(self):
-        pass
     
-    def Extend(self):
-        pass
+class Rotate_arm(QThread):
+    pass
     
-    def Secure_package(self):
-        pass
-    
-    def Retract_arm(self):
+class Extend(self):
+    pass
+class Secure_package(self):
+    pass
+
+class Retract_arm(self):
         pass
     
     
@@ -42,7 +42,11 @@ class MainSystem(QThread):
             
                 
                 
-                
+if __name__ == "main":
+    print(1)
+    print('1')
+    
+
                 
                 
                 
