@@ -30,7 +30,7 @@ class ConveyorSys(QThread):
     # TODO 明确要实现的功能，再回到sys_lib去一步步实现
     def run(self):
         while not self.isInterruptionRequested():
-            # 闲置状态
+            # 
             if self.state == IDLE:
                 #start_time = time.time()
                 # TODO 按钮返回>0?
@@ -43,9 +43,9 @@ class ConveyorSys(QThread):
                 self.state = FIND_PACKAGE
                 self.Conv_mutex.unlock()
 
-            # 寻找包裹
+            # 
             elif self.state == FIND_PACKAGE:
-                # 当未找到包裹的时候，一直尝试找到包裹
+                # 
                 while self.system.ir_sensor_find_package()> 0:
                     # self.state = CATCH_PACKAGE
                     time.sleep(0.1)
@@ -54,7 +54,7 @@ class ConveyorSys(QThread):
                 #    self.state = IDLE
                 self.state = CATCH_PACKAGE
 
-            # 抓取包裹
+            # 
             elif self.state == CATCH_PACKAGE:
                 # 当Limit switch 关闭的时候
                 # TODO 如果第一次爪子没抓住，要缩回，再重新抓，这里尚未实现
@@ -69,16 +69,16 @@ class ConveyorSys(QThread):
             elif self.state == LIFT_ARM:
                 # 当垂直方向 TOFSensor 反馈的高度符合预期
                 start_time = time.time()
-                # 或者当计时器超过5秒
+                # 
                 while self.system.vertical_height() < 20:
-                    # 每次网上提升10 step
+                    # 
                     self.system.lift_arm()
                     if time.time()-start_time > 5:
                         break
 
                 self.state = START_TRANSVERSE
 
-            # 开始传输
+            # 
             elif self.state == START_TRANSVERSE:
                 while self.system.horizontal_distance() < 10:
                     self.system.move_forward()
@@ -86,28 +86,28 @@ class ConveyorSys(QThread):
                 self.state = PUT_DOWN_PACKAGE
 
 ###################
-            # 放下包裹
+            # 
             elif self.state == PUT_DOWN_PACKAGE:
                 self.system.lower_arm()
                 self.system.extend_arm()
                 time.sleep(1)
                 self.state = RETRACT_ARM
 
-            # 收回手臂
+            # 
             elif self.state == RETRACT_ARM:
                 self.system.retract_arm()
                 #TODO
                 time.sleep(1)
                 self.state = BACK_TRANSVERSE_LIFT_ARM
 
-            # 升起手臂
+            # 
             elif self.state == BACK_TRANSVERSE_LIFT_ARM:
                 self.system.lift_arm()
                 while self.system.vertical_height()<20:
                     self.system.lift_arm()
                 self.state = BACK_TRANSVERSE
 
-            # 传输回起点
+            # 
             elif self.state == BACK_TRANSVERSE:
                 self.system.move_backword()
                     

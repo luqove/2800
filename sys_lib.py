@@ -58,11 +58,6 @@ class System(QThread):
         # ?? 反转180回来
         self.servo_H.act(180)
 
-    # 伸出爪子抓取
-    # def start_gripper(self):
-    #     # 60 degree? limit_switch需要被触发
-    #     if self.limit_switch_closed():
-    #         self.servo_G.act(60)
 
     # 关闭爪子
     # TODO 角度可能要改
