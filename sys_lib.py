@@ -110,9 +110,9 @@ class System(QThread):
 
     def release_package(self):
         #ir 读数<10cm
-        self.ir_sensor.read_data() < 10
-        # ? 转多少不清楚
-        self.servo_G.act(180)
+        if self.ir_sensor.read_data() == 0:
+        # TODO servo_G转多少?
+            self.servo_G.act(180)
 
 
 

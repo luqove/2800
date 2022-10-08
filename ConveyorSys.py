@@ -1,7 +1,7 @@
 import time
 from sys_lib import System
 from PyQt5.QtCore import QThread, QMutex
-from Lib.Timer import TimerCount
+from Lib.timer import TimerCount
 from const import (IDLE, FIND_PACKAGE, CATCH_PACKAGE, LIFT_ARM,
                    START_TRANSVERSE, PUT_DOWN_PACKAGE, RETRACT_ARM,
                    BACK_TRANSVERSE_LIFT_ARM, BACK_TRANSVERSE)
@@ -32,8 +32,11 @@ class ConveyorSys(QThread):
         while not self.isInterruptionRequested():
             # 闲置状态
             if self.state == IDLE:
-                while '''开关未被按下''':
-                    time.sleep(0.1)
+                start_time = time.time()
+                while(1):
+                    time.sleep(1)
+                    if time.time()-start_time<2:
+                        break 
 
                 self.Conv_mutex.lock()
                 self.state = FIND_PACKAGE
@@ -75,7 +78,7 @@ class ConveyorSys(QThread):
 
             # 开始传输
             elif self.state == START_TRANSVERSE:
-                while self.system.horizontal_distance() > 10:
+                while self.system.horizontal_distance() < 10:
                     self.system.move_forward()
 
                 self.state = PUT_DOWN_PACKAGE
@@ -91,11 +94,15 @@ class ConveyorSys(QThread):
             # 收回手臂
             elif self.state == RETRACT_ARM:
                 self.system.retract_arm()
+                #TODO
+                time.sleep(1)
                 self.state = BACK_TRANSVERSE_LIFT_ARM
 
             # 升起手臂
             elif self.state == BACK_TRANSVERSE_LIFT_ARM:
                 self.system.lift_arm()
+                while self.system.vertical_height()<20:
+                    self.system.lift_arm()
                 self.state = BACK_TRANSVERSE
 
             # 传输回起点

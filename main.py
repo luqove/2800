@@ -2,11 +2,10 @@ import sys
 import time
 from PyQt5.QtCore import Qt, pyqtSignal, QThread, QMutex
 from PyQt5.QtWidgets import QApplication, QMainWindow
-import RPi.GPIO as GPIO
-
 from MainPanel import Ui_MainWindow
 from ConveyorSys import ConveyorSys
-from Lib.Timer import TimerCount
+from Lib.timer import TimerCount
+import RPi.GPIO as GPIO
 
 mutex = QMutex()
 
