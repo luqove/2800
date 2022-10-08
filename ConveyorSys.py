@@ -34,7 +34,7 @@ class ConveyorSys(QThread):
             if self.state == IDLE:
                 #start_time = time.time()
                 # TODO 按钮返回>0?
-                while(self.system.limit_switch.get_read()>0):
+                while(self.system.limit_switch_start.get_read()>0):
                     time.sleep(0.5)
                     #if time.time()-start_time<2:
                     #    break 
@@ -46,20 +46,21 @@ class ConveyorSys(QThread):
             # 寻找包裹
             elif self.state == FIND_PACKAGE:
                 # 当未找到包裹的时候，一直尝试找到包裹
-                while self.system.ir_sensor_find_package() == 0:
+                while self.system.ir_sensor_find_package()> 0:
                     # self.state = CATCH_PACKAGE
                     time.sleep(0.1)
-                if self.timer.time > 120:
-                    self.state = IDLE
+                    self.system.rotate_arm()
+                #if self.timer.time > 120:
+                #    self.state = IDLE
                 self.state = CATCH_PACKAGE
 
             # 抓取包裹
             elif self.state == CATCH_PACKAGE:
                 # 当Limit switch 关闭的时候
                 # TODO 如果第一次爪子没抓住，要缩回，再重新抓，这里尚未实现
-                while self.system.limit_switch.get_read() <= 0:
+                while self.system.limit_switch_gripper.get_read() <= 0:
                     self.system.extend_arm()
-                self.system.reset_arm()
+                #self.system.reset_arm()
                 self.system.close_gripper()
                 self.system.retract_arm()
                 self.state = LIFT_ARM

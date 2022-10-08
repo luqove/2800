@@ -40,6 +40,8 @@ class System(QThread):
         self.arm_length = 0  # 手臂伸出的长度
         self.start_length = 0  # TODO 手臂的初始长度
 
+    def rotate_arm(self):
+        self.DC_rotate.turn_forward()
     # 伸出机械臂
     def extend_arm(self):
         # ??不确定怎么让servo 推着rack往前走
@@ -48,6 +50,7 @@ class System(QThread):
 
     def reset_arm(self):
         self.arm_length = 0
+        
 
     # 收回手臂
     # TODO 机器测试的时候，测量机械臂的初始长度对应的舵机角度
