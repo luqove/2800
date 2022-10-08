@@ -32,11 +32,12 @@ class ConveyorSys(QThread):
         while not self.isInterruptionRequested():
             # 闲置状态
             if self.state == IDLE:
-                start_time = time.time()
-                while(1):
-                    time.sleep(1)
-                    if time.time()-start_time<2:
-                        break 
+                #start_time = time.time()
+                # TODO 按钮返回>0?
+                while(self.system.limit_switch.get_read()>0):
+                    time.sleep(0.5)
+                    #if time.time()-start_time<2:
+                    #    break 
 
                 self.Conv_mutex.lock()
                 self.state = FIND_PACKAGE
