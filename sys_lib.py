@@ -26,7 +26,6 @@ class System(QThread):
         self.clock = TimerCount(120)
         self.servo_G = ServoMotor()
         self.servo_H = ServoMotor()
-        self.limit_switch = LimitSwitch()
         self.stepper_motor_vertical = StepperMotor()
         self.DC_transverse = DcMotor()
         self.DC_rotate = DcMotor()
@@ -34,6 +33,8 @@ class System(QThread):
         self.DC_encoder = DCEncoder()
         self.Tof_sensor_vertical = TofSensor()
         self.Tof_sensor_horizontal = TofSensor()
+        self.limit_switch_gripper = LimitSwitch()
+        self.limit_switch_start = LimitSwitch()
 
         # 额外的参数
         self.arm_length = 0  # 手臂伸出的长度
