@@ -17,7 +17,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         self.setupUi(self)
 
         # self.Start_btn.clicked.connect(self.start_conveyor_machine)
-        self.Start_btn.clicked.connect(self.test)
+        self.Start_btn.clicked.connect(self.start_conveyor_machine)
         self.Stop_btn.clicked.connect(self.stop_conveyor_machine)
         self.Stop_btn.clicked.connect(self.stop_test)
 

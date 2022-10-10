@@ -31,20 +31,20 @@ class ConveyorSys(QThread):
     def run(self):
         while not self.isInterruptionRequested():
             # 
-            if self.state == IDLE:
-                #start_time = time.time()
-                # TODO 按钮返回>0?
-                while(self.system.limit_switch_start.get_read()>0):
-                    time.sleep(0.5)
-                    #if time.time()-start_time<2:
-                    #    break 
-
-                self.Conv_mutex.lock()
-                self.state = FIND_PACKAGE
-                self.Conv_mutex.unlock()
+            #if self.state == IDLE:
+            #    #start_time = time.time()
+            #    # TODO 按钮返回>0?
+            #    while(self.system.limit_switch_start.get_read()>0):
+            #        time.sleep(0.5)
+            #        #if time.time()-start_time<2:
+            #        #    break 
+#
+            #    self.Conv_mutex.lock()
+            #    self.state = FIND_PACKAGE
+            #    self.Conv_mutex.unlock()
 
             # 
-            elif self.state == FIND_PACKAGE:
+            if self.state == FIND_PACKAGE:
                 # 
                 while self.system.ir_sensor_find_package()> 0:
                     # self.state = CATCH_PACKAGE
