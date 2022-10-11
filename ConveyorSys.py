@@ -38,24 +38,25 @@ class ConveyorSys(QThread):
             #        time.sleep(0.5)
             #        #if time.time()-start_time<2:
             #        #    break 
-#
+
             #    self.Conv_mutex.lock()
             #    self.state = FIND_PACKAGE
             #    self.Conv_mutex.unlock()
 
             # 
-            if self.state == FIND_PACKAGE:
-                # 
-                while self.system.ir_sensor_find_package()> 0:
-                    # self.state = CATCH_PACKAGE
-                    time.sleep(0.1)
-                    self.system.rotate_arm()
-                #if self.timer.time > 120:
-                #    self.state = IDLE
-                self.state = CATCH_PACKAGE
+            ##TODO 因为目前没有Find pakcage
+            #if self.state == FIND_PACKAGE:
+            #    # 
+            #    while self.system.ir_sensor_find_package()> 0:
+            #        # self.state = CATCH_PACKAGE
+            #        time.sleep(0.1)
+            #        self.system.rotate_arm()
+            #    #if self.timer.time > 120:
+            #    #    self.state = IDLE
+            #    self.state = CATCH_PACKAGE
 
             # 
-            elif self.state == CATCH_PACKAGE:
+            if self.state == CATCH_PACKAGE:
                 # 当Limit switch 关闭的时候
                 # TODO 如果第一次爪子没抓住，要缩回，再重新抓，这里尚未实现
                 while self.system.limit_switch_gripper.get_read() <= 0:
