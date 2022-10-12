@@ -5,7 +5,8 @@ from PyQt5.QtCore import pyqtSignal, QThread, QMutex
 from Lib.IRSensor import IRsensor
 from Lib.ServoMotor import ServoMotor
 from Lib.StepperMotor import StepperMotor
-from Lib.TofSensor import TofSensor
+from Lib.VL53L3CX_TofSensor import TofSensor
+from Lib.horizontal_tof import Horizontal_TOF 
 from Lib.LimitSwitch import LimitSwitch
 from Lib.DcMotor import DcMotor
 from Lib.DCEncoder import DCEncoder
@@ -32,9 +33,10 @@ class System(QThread):
         self.ir_sensor = IRsensor()
         self.DC_encoder = DCEncoder()
         self.Tof_sensor_vertical = TofSensor()
+        self.horizontal_tof = Horizontal_TOF()
         self.Tof_sensor_horizontal = TofSensor()
         self.limit_switch_gripper = LimitSwitch()
-        self.limit_switch_start = LimitSwitch()
+        #self.limit_switch_start = LimitSwitch()
 
         # 额外的参数
         self.arm_length = 0  # 手臂伸出的长度
