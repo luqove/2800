@@ -9,8 +9,9 @@ from Lib.VL53L3CX_TofSensor import TofSensor
 from Lib.horizontal_tof import Horizontal_TOF 
 from Lib.LimitSwitch import LimitSwitch
 from Lib.DcMotor import DcMotor
-from Lib.DCEncoder import DCEncoder
+from Lib.DCEncoder import *
 from Lib.timer import TimerCount
+
 
 
 class System(QThread):
