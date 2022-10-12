@@ -63,6 +63,10 @@ class System(QThread):
     # TODO 角度可能要改
     def close_gripper(self):
         self.servo_G.act(0)
+        
+    def release_gripper(self):
+        #TODO 需要明白servo_angle
+        self.servo_G.act(180)
 
     # TODO 一点一点的转Stepper
     def lift_arm(self):

@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
+from gpiozero import RotaryEncoder
+from gpiozero.tools import scaled_half
 
-
-class DCEncoder(object):
-    def __init__(self,value):
-        self.value = value
-        pass
+rotor = RotaryEncoder(21, 20)
+led = PWMLED(5)
+led.source = scaled_half(rotor.values)

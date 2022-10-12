@@ -1,5 +1,5 @@
 import sys
-import time
+# import time
 from PyQt5.QtCore import Qt, pyqtSignal, QThread, QMutex
 from PyQt5.QtWidgets import QApplication, QMainWindow
 from MainPanel import Ui_MainWindow
@@ -19,7 +19,7 @@ class MainWindow(QMainWindow, Ui_MainWindow):
         # self.Start_btn.clicked.connect(self.start_conveyor_machine)
         self.Start_btn.clicked.connect(self.start_conveyor_machine)
         self.Stop_btn.clicked.connect(self.stop_conveyor_machine)
-        self.Stop_btn.clicked.connect(self.stop_test)
+        # self.Stop_btn.clicked.connect(self.stop_test)
 
     def start_conveyor_machine(self):
         self.conveyor_sys = ConveyorSys()

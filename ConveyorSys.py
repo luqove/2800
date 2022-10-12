@@ -63,7 +63,9 @@ class ConveyorSys(QThread):
                     self.system.extend_arm()
                 #self.system.reset_arm()
                 self.system.close_gripper()
+                time.sleep(0.5)
                 self.system.retract_arm()
+                time.sleep(2)
                 self.state = LIFT_ARM
 
             # 升起手臂
@@ -89,8 +91,13 @@ class ConveyorSys(QThread):
 ###################
             # 
             elif self.state == PUT_DOWN_PACKAGE:
+                # 
                 self.system.lower_arm()
+                time.sleep(0.5)
+                #TODO 这里extend 需要变成while loop
                 self.system.extend_arm()
+                time.sleep(0.5)
+                self.system.release_gripper()
                 time.sleep(1)
                 self.state = RETRACT_ARM
 
@@ -104,6 +111,7 @@ class ConveyorSys(QThread):
             # 
             elif self.state == BACK_TRANSVERSE_LIFT_ARM:
                 self.system.lift_arm()
+                time.sleep(2)
                 while self.system.vertical_height()<20:
                     self.system.lift_arm()
                 self.state = BACK_TRANSVERSE
