@@ -2,17 +2,10 @@ import RPi.GPIO as GPIO
 import pigpio
 import time
 
-# Dcencoder_rotate = DCEncoder(pin1)
-# Dc_rotate = DcMotorDriver(1,2,3, Dcencoder_rotate)
-from PyQt5.QtCore import QThread, pyqtSignal
 
-GPIO.setmode(GPIO.BCM)
-class DcMotor(QThread):
-    # 用于向父线程反馈Encoder的数值。
-    encode_value = pyqtSignal(int)
+class DcMotor(object):
 
     def __init__(self, pin_in1, pin_in2, pin_pwm, encoder=None):
-        super(DcMotor, self).__init__()
         self.pin_in1 = pin_in1
         self.pin_in2 = pin_in2
         self.pin_pwm = pin_pwm
@@ -40,10 +33,6 @@ class DcMotor(QThread):
     def turn_backward(self):
         GPIO.output(self.pin_in1, 0)
         GPIO.output(self.pin_in2, 1)
-
-    def send_encoder_value(self):
-        # 向父线程反馈Encoder的数值。
-        self.encode_value.emit(self.encoder.value)
 
     def turn_off(self):
         GPIO.output(self.pin_in1, 0)
