@@ -1,11 +1,12 @@
 import RPi.GPIO as GPIO
 from gpiozero import RotaryEncoder
-from gpiozero.tools import scaled_half
 
-#class RotaryEncoder(object):
-#    def __init__(self):
 
-if __name__ == '__main__':
-    rotor = RotaryEncoder(21, 20)
-    led = PWMLED(5)
-    led.source = scaled_half(rotor.values) 
+class DCEncoder(object):
+    def __init__(self, pin1, pin2):
+        self.rotor = RotaryEncoder(pin1, pin2, wrap=True)
+        self.rotor.steps = 0
+
+    # step 会在motor往一个方向旋转的时候一直增加或者减少。
+    def return_value(self):
+        return self.rotor.steps

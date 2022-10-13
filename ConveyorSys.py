@@ -76,7 +76,7 @@ class ConveyorSys(QThread):
                 while self.system.vertical_height() < 20:
                     # 
                     self.system.lift_arm()
-                    if time.time()-start_time > 5:
+                    if time.time()-start_time > 8:
                         break
 
                 self.state = START_TRANSVERSE
@@ -88,15 +88,13 @@ class ConveyorSys(QThread):
 
                 self.state = PUT_DOWN_PACKAGE
 
-###################
-            # 
+
+            # 放下包裹
             elif self.state == PUT_DOWN_PACKAGE:
                 # 
                 self.system.lower_arm()
                 time.sleep(0.5)
-                #TODO 这里extend 需要变成while loop
-                self.system.extend_arm()
-                time.sleep(0.5)
+                self.system.arm_reach_end()
                 self.system.release_gripper()
                 time.sleep(1)
                 self.state = RETRACT_ARM

@@ -50,7 +50,6 @@ class MainWindow(QMainWindow, Ui_MainWindow):
     def test_feedback(self):
         self.print_f('1')
 
-
     def print_f(self, info):
         self.Feedback_bro.append(info)
 
