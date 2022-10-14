@@ -79,7 +79,7 @@ class System(QThread):
 
     def move_backward_arm(self):
         # TODO 180?
-        self.servo_H.act(180)
+        self.servo_H.value(-1)
 
     def vertical_height(self):
         # TODO 可能需要对 TOFSensor的读数进行处理，让它以 cm 为单位

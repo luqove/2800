@@ -1,5 +1,4 @@
 
-
 LED_TEST_P = 10
 
 # step motor
@@ -27,3 +26,11 @@ PUT_DOWN_PACKAGE = 6
 RETRACT_ARM = 7
 BACK_TRANSVERSE_LIFT_ARM = 8
 BACK_TRANSVERSE = 9
+
+
+####other pin
+DC_encoder_pin1 = 5
+DC_encoder_pin2 = 6
+
+stepper_motor_vertical_pin = 7
+

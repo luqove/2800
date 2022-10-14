@@ -20,3 +20,13 @@ PUT_DOWN_PACKAGE = 6
 RETRACT_ARM = 7
 BACK_TRANSVERSE_LIFT_ARM = 8
 BACK_TRANSVERSE = 9
+
+###Other pin
+stepper_motor_vertical_pin = 2,3,4
+DC_encoder_pin1 = 5
+DC_encoder_pin2 = 6
+
+######
+stepper_motor_vertical_pin = 2
+DC_encoder_pin1 = 3
+DC_encoder_pin2 = 6
