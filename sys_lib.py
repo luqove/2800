@@ -33,9 +33,9 @@ class System(QThread):
         self.DC_rotate = DcMotor(DC_rotate_pin)
         self.ir_sensor = IRsensor(ir_sensor_pin)
         self.DC_encoder = DCEncoder(DC_encoder_pin1, DC_encoder_pin2)
-        self.Tof_sensor_vertical = TofSensor()
-        self.horizontal_tof = Horizontal_TOF()
-        self.Tof_sensor_horizontal = TofSensor()
+        #self.Tof_sensor_vertical = TofSensor()
+        #self.horizontal_tof = Horizontal_TOF()
+        #self.Tof_sensor_horizontal = TofSensor()
         self.limit_switch_gripper = LimitSwitch(limit_switch_gripper_pin)
 
         # 额外的参数
@@ -48,7 +48,7 @@ class System(QThread):
     # 伸出机械臂
     def extend_arm(self):
         # ??不确定怎么让servo 推着rack往前走
-        self.servo_H.value(self.arm_length-1)
+        self.servo_H.value=(self.arm_length-1)
         self.arm_length += 0.01
 
     def reset_arm(self):
@@ -58,16 +58,24 @@ class System(QThread):
     # TODO angle
     def retract_arm(self):
         # ?? 反转180回来
-        self.servo_H.value(-1)
+        self.servo_H.value = -1
 
 
     # 关闭爪子
     # # TODO 爪子松开对应的是 1 还是 0
     def close_gripper(self):
-        self.servo_G.value(-1)
+        x= -1
+        diretion = 1
+        while(x<1):
+            x += diretion*0.01
+        self.servo_G.value = 1
         
     def release_gripper(self):
-        self.servo_G.value(1)
+        x= 1
+        diretion = -1
+        while(x<1):
+            x += diretion*0.01
+        self.servo_G.value = 1
 
     # TODO Stepper
     def lift_arm(self):
@@ -80,6 +88,9 @@ class System(QThread):
     def move_backward_arm(self):
         # TODO 180?
         self.servo_H.value(-1)
+
+        #self.servo_H.act(180)
+
 
     def vertical_height(self):
         # TODO 可能需要对 TOFSensor的读数进行处理，让它以 cm 为单位

@@ -73,11 +73,11 @@ class ConveyorSys(QThread):
                 # 当垂直方向 TOFSensor 反馈的高度符合预期
                 start_time = time.time()
                 # 
-                while self.system.vertical_height() < 20:
+                #while self.system.vertical_height() < 20:
                     # 
-                    self.system.lift_arm()
-                    if time.time()-start_time > 8:
-                        break
+                self.system.lift_arm()
+                if time.time()-start_time > 8:
+                    break
 
                 self.state = START_TRANSVERSE
 
