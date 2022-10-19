@@ -87,7 +87,7 @@ class System(QThread):
 
     def move_backward_arm(self):
         # TODO 180?
-        self.servo_H.value(-1)
+        self.servo_H.value = -1
 
         #self.servo_H.act(180)
 
