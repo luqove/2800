@@ -26,16 +26,13 @@ class System(QThread):
         # TODO 需要填入pin 的 number
         super().__init__(self)
         self.clock = TimerCount(120)
-        self.servo_G = Servo(Servo_G_pin)
-        self.servo_H = Servo(Servo_H_pin)
+        self.servo_G = ServoMotor(Servo_G_pin)
+        self.servo_H = ServoMotor(Servo_H_pin)
         self.stepper_motor_vertical = StepperMotor(stepper_motor_vertical_pin)
-        self.DC_transverse = DcMotor(DC_transverse_pin)
+        self.DC_transverse = DcMotor(DC_transverse_pin1,DC_transverse_pin_2,DC_transverse_pin_3)
         self.DC_rotate = DcMotor(DC_rotate_pin)
         self.ir_sensor = IRsensor(ir_sensor_pin)
         self.DC_encoder = DCEncoder(DC_encoder_pin1, DC_encoder_pin2)
-        #self.Tof_sensor_vertical = TofSensor()
-        #self.horizontal_tof = Horizontal_TOF()
-        #self.Tof_sensor_horizontal = TofSensor()
         self.limit_switch_gripper = LimitSwitch(limit_switch_gripper_pin)
 
         # 额外的参数
@@ -64,19 +61,14 @@ class System(QThread):
     # 关闭爪子
     # # TODO 爪子松开对应的是 1 还是 0
     def close_gripper(self):
-        x= -1
-        diretion = 1
-        while(x<1):
-            x += diretion*0.01
-        self.servo_G.value = 1
+        self.servo_G.close_servo()
+        time.sleep(1)
         
     def release_gripper(self):
-        x= 1
-        diretion = -1
-        while(x<1):
-            x += diretion*0.01
-        self.servo_G.value = 1
-
+        self.servo_G.open_servo()
+        time.sleep(1)
+        
+        
     # TODO Stepper
     def lift_arm(self):
         self.stepper_motor_vertical.act(steps=10)
@@ -92,23 +84,23 @@ class System(QThread):
         #self.servo_H.act(180)
 
 
-    def vertical_height(self):
-        # TODO 可能需要对 TOFSensor的读数进行处理，让它以 cm 为单位
-        height = self.Tof_sensor_vertical.read_data()
-        '''对 height 的处理'''
-        return height
+    #def vertical_height(self):
+    #    # TODO 可能需要对 TOFSensor的读数进行处理，让它以 cm 为单位
+    #    height = self.Tof_sensor_vertical.read_data()
+    #    '''对 height 的处理'''
+    #    return height
+#
+    #def horizontal_distance(self):
+    #    # TODO start_measurement 怎么处理
+    #    distance = self.horizontal_tof.start_measurement()
+    #    '''对 height 的处理'''
+    #    return distance
 
-    def horizontal_distance(self):
-        # TODO start_measurement 怎么处理
-        distance = self.horizontal_tof.start_measurement()
-        '''对 height 的处理'''
-        return distance
-
-    def reach_end(self):
-        # TODO 10cm?
-        if self.horizontal_distance() < 10:
-            self.DC_transverse.turn_off()
-
+    #def reach_end(self):
+    #    # TODO 10cm?
+    #    if self.horizontal_distance() < 10:
+    #        self.DC_transverse.turn_off()
+#
     # TODO 0.1的移动时间可能需要修改
     def move_forward(self):
         self.DC_transverse.turn_forward()
@@ -126,6 +118,6 @@ class System(QThread):
     def arm_reach_end(self):
         self.servo_H.max()
         # TODO 秒数
-        time.sleep(2)
+        time.sleep(1)
         
 

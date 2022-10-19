@@ -8,10 +8,12 @@ MS3_P = 10
 STEP_P = 25
 DIR_P = 24
 
-##TODO fit pin numbers
-Servo_G_pin = 1
+##TODO pin number
+Servo_G_pin = 12
 Servo_H_pin = 2
-DC_transverse_pin = 3
+DC_transverse_pin1 = 8
+DC_transverse_pin_2 = 9
+DC_transverse_pin_3 = 10
 DC_rotate_pin = 4
 ir_sensor_pin = 5
 limit_switch_gripper_pin = 6
@@ -26,6 +28,7 @@ PUT_DOWN_PACKAGE = 6
 RETRACT_ARM = 7
 BACK_TRANSVERSE_LIFT_ARM = 8
 BACK_TRANSVERSE = 9
+
 
 
 ####other pin
